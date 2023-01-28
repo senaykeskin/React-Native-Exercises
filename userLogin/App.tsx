@@ -6,54 +6,68 @@
  */
 
 import React, {useState} from 'react';
-//import { Icon } from "@rneui/themed";
-import Icon from 'native-base';
-//import { Icon } from "@react-native-material/core";
-//import { Icon } from 'react-native-elements';
+import Icon2 from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Entypo';
+import User from 'react-native-vector-icons/FontAwesome';
 import type {PropsWithChildren} from 'react';
 import {
-  Button,
-  Image,
   SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
-  View,
+  TouchableOpacity,
+  View
 } from "react-native";
 
+const sifreGizleme = {
 
-
+}
 
 function App(): JSX.Element {
   const [text, setText] = useState("")
+  const [passwordVisible, setPasswordVisible] = useState(true)
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.item}>
+        <User
+          style={styles.password}
+          name="user"
+          size={25}
+          color="black"
+        />
         <TextInput
-          style={styles.input}
+          style={styles.user_input}
           placeholder= "Kullanıcı Adı/E-posta"
         />
       </View>
       <View style={styles.item}>
+        <Icon2
+          style={styles.password}
+          name="key"
+          size={25}
+          color="black"
+        />
         <TextInput
-          style={styles.input}
+          style={styles.password_input}
+          secureTextEntry={passwordVisible}
           placeholder= "Şifre"
           value={text}
           onChangeText={setText}
-          secureTextEntry={true}
         />
-        <Button
-          title={"a"}
-          color = "#f194ff"
-        />
-      </View>
-      <View style={styles.button}>
-        <Button
-          onPress={() => console.log("giris basarili")}
-          title={"Giriş"}
+        <Icon.Button
+          style={styles.icon}
+          name={passwordVisible ? "eye-with-line": "eye"}
+          size={30}
+          color="#000000"
+          onPress={()=> setPasswordVisible(!passwordVisible)}
         />
       </View>
-      <Icon name="md-beer" type="ionicon" color="#887700"/>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        style={styles.button}
+        onPress={()=> console.log("giriş yapıldı")}>
+        <Text style={styles.text}>GİRİŞ</Text>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 }
@@ -74,20 +88,42 @@ const styles = StyleSheet.create({
     paddingRight: 20,
     alignItems: "center",
     marginHorizontal: "10%",
-    justifyContent: "space-between",
     flexDirection: "row"
   },
-  input: {
+  password_input: {
     fontSize: 20,
     padding: 15,
+    paddingLeft: 15,
+    width: "75%"
   },
   button: {
-    marginTop: 20,
-    marginLeft: "30%",
-    marginRight: "30%",
+    backgroundColor: "#08a6db",
+    marginTop: 10,
+    marginLeft: "10%",
+    marginRight: "10%",
     justifyContent: "center",
-    width: "40%",
+    alignItems: "center",
+    width: "80%",
+    height: 40
+
   },
+  icon: {
+    backgroundColor: "lightgray",
+    paddingRight: 0,
+    width: "100%",
+  },
+  password: {
+    paddingLeft: 15,
+  },
+  user_input: {
+    fontSize: 20,
+    padding: 15,
+    width: "90%"
+  },
+  text: {
+    fontSize: 22,
+    fontWeight: "bold"
+  }
 
 });
 
