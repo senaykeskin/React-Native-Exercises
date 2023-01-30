@@ -27,7 +27,7 @@ function App(): JSX.Element {
   return (
     <SafeAreaView style={styles.container}>
       <LinearGradient
-        colors={['#B06AB3','#4568DC']}
+        colors={['#FFA17F','#636FA4']}
         style={styles.linearGradient}>
         <View style={styles.item}>
           <User
