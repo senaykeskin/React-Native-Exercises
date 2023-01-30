@@ -6,75 +6,87 @@
  */
 
 import React, {useState} from 'react';
-import Icon2 from 'react-native-vector-icons/Ionicons';
-import Icon from 'react-native-vector-icons/Entypo';
+import Password from 'react-native-vector-icons/Ionicons';
+import Eye from 'react-native-vector-icons/Entypo';
 import User from 'react-native-vector-icons/FontAwesome';
+import NextIcon from 'react-native-vector-icons/AntDesign';
+import LinearGradient from 'react-native-linear-gradient';
+
 import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
   StyleSheet,
-  Text,
   TextInput,
-  TouchableOpacity,
+  TouchableHighlight,
   View
 } from "react-native";
-
-const sifreGizleme = {
-
-}
 
 function App(): JSX.Element {
   const [text, setText] = useState("")
   const [passwordVisible, setPasswordVisible] = useState(true)
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.item}>
-        <User
-          style={styles.password}
-          name="user"
-          size={25}
-          color="black"
-        />
-        <TextInput
-          style={styles.user_input}
-          placeholder= "Kullanıcı Adı/E-posta"
-        />
-      </View>
-      <View style={styles.item}>
-        <Icon2
-          style={styles.password}
-          name="key"
-          size={25}
-          color="black"
-        />
-        <TextInput
-          style={styles.password_input}
-          secureTextEntry={passwordVisible}
-          placeholder= "Şifre"
-          value={text}
-          onChangeText={setText}
-        />
-        <Icon.Button
-          style={styles.icon}
-          name={passwordVisible ? "eye-with-line": "eye"}
-          size={30}
-          color="#000000"
-          onPress={()=> setPasswordVisible(!passwordVisible)}
-        />
-      </View>
-      <TouchableOpacity
-        activeOpacity={0.5}
-        style={styles.button}
-        onPress={()=> console.log("giriş yapıldı")}>
-        <Text style={styles.text}>GİRİŞ</Text>
-      </TouchableOpacity>
+      <LinearGradient
+        colors={['#B06AB3','#4568DC']}
+        style={styles.linearGradient}>
+        <View style={styles.item}>
+          <User
+            style={styles.password}
+            name="user"
+            size={25}
+            color="black"
+          />
+          <TextInput
+            style={styles.user_input}
+            placeholder= "Kullanıcı Adı/E-posta"
+          />
+        </View>
+        <View style={styles.item}>
+          <Password
+            style={styles.password}
+            name="key"
+            size={25}
+            color="black"
+          />
+          <TextInput
+            style={styles.password_input}
+            secureTextEntry={passwordVisible}
+            placeholder= "Şifre"
+            value={text}
+            onChangeText={setText}
+          />
+          <TouchableHighlight>
+            <Eye
+              name={passwordVisible ? "eye-with-line": "eye"}
+              size={25}
+              color="black"
+              onPress={()=> setPasswordVisible(!passwordVisible)}
+            />
+          </TouchableHighlight>
+        </View>
+        <TouchableHighlight
+          activeOpacity={0.6}
+          underlayColor="transparent"
+          onPress={()=> console.log("giriş başarılı")}>
+          <NextIcon
+            name="rightcircleo"
+            style={styles.nextIcon}
+            size={70}
+            color={"black"}
+          />
+        </TouchableHighlight>
+      </LinearGradient>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  linearGradient: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
   container: {
-    backgroundColor: "lightgray",
     flex: 1,
     justifyContent: "center",
     alignItems: "center"
@@ -94,23 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 15,
     paddingLeft: 15,
-    width: "75%"
-  },
-  button: {
-    backgroundColor: "#08a6db",
-    marginTop: 10,
-    marginLeft: "10%",
-    marginRight: "10%",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "80%",
-    height: 40
-
-  },
-  icon: {
-    backgroundColor: "lightgray",
-    paddingRight: 0,
-    width: "100%",
+    width: "79%"
   },
   password: {
     paddingLeft: 15,
@@ -120,10 +116,11 @@ const styles = StyleSheet.create({
     padding: 15,
     width: "90%"
   },
-  text: {
-    fontSize: 22,
-    fontWeight: "bold"
-  }
+  nextIcon: {
+    paddingTop: 40,
+  },
+
+
 
 });
 
